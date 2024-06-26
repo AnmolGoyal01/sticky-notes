@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+::selection{
+    color: rgb(95, 67, 37);
+}
+::-webkit-scrollbar-track {
+    
+}
