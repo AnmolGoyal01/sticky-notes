@@ -31,7 +31,10 @@ export default function Card(props) {
         whileTap={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 700, damping: 20 }}
         className="bg-zinc-900 text-zinc-300 w-[95%] h-[16%] rounded-lg border-none shadow-lg"
-        onClick={() => {}}
+        onClick={() => {
+          props.setPreviewCardIndex(props.index)
+          props.setCurrentDisplay("PREVIEW_SCREEN")
+        }}
       >
         Preview
       </motion.button>

@@ -8,11 +8,15 @@ export default function Foreground() {
   const data = [];
 
   const [content, setContent] = useState(data);
-  const [addNewPreview, toggleAddNewPreview] = useState(false);
-  const [preview, setPreview] = useState(false);
-  const [previewIndex, setPreviewIndex] = useState(0);
-
+  const [currentDisplay, setCurrentDisplay] = useState("HOME");
+  const [previewCardIndex, setPreviewCardIndex] = useState(0)
   const ref = useRef(null);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      setCurrentDisplay("HOME");
+    }
+  });
 
   const addCard = (newContentAdded) => {
     const newContent = [...content];
@@ -24,10 +28,18 @@ export default function Foreground() {
     newContent.splice(index, 1);
     setContent(newContent);
   };
+  const editCard = (index, newText) => {
+    const newContent = [...content];
+    newContent[index] = newText;
+    setContent(newContent);
+  };
 
   return (
     <>
-      <AddButton display={!addNewPreview} setDisplay={toggleAddNewPreview} />
+      <AddButton
+        currentDisplay={currentDisplay}
+        setCurrentDisplay={setCurrentDisplay}
+      />
       <div
         ref={ref}
         className="absolute z-[3] h-screen w-full p-6 overflow-scroll flex shrink-0 flex-wrap gap-6 justify-start content-start"
@@ -39,6 +51,8 @@ export default function Foreground() {
               index={idx}
               deleteCard={deleteCard}
               reference={ref}
+              setCurrentDisplay={setCurrentDisplay}
+              setPreviewCardIndex={setPreviewCardIndex}
               key={idx}
             />
           );
@@ -46,16 +60,18 @@ export default function Foreground() {
       </div>
       <AddNewCard
         addContent={addCard}
-        display={addNewPreview}
-        setDisplay={toggleAddNewPreview}
+        // display={addNewPreview}
+        // setDisplay={toggleAddNewPreview}
+        currentDisplay={currentDisplay}
+        setCurrentDisplay={setCurrentDisplay}
       />
-      {/* <PreviewScreen
-        preview={preview}
-        setPreview={setPreview}
-        previewIndex={previewIndex}
-        content={content}
-        setContent={setContent}
-      /> */}
+      <PreviewScreen
+        currentDisplay={currentDisplay}
+        setCurrentDisplay={setCurrentDisplay}
+        previewCardIndex={previewCardIndex}
+        content = {content}
+        editCard = {editCard}
+      />
     </>
   );
 }
