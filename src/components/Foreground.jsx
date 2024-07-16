@@ -9,19 +9,19 @@ export default function Foreground() {
 
   const [content, setContent] = useState(data);
   const [currentDisplay, setCurrentDisplay] = useState("HOME");
-  const [previewCardIndex, setPreviewCardIndex] = useState(0)
+  const [previewCardIndex, setPreviewCardIndex] = useState(0);
   const ref = useRef(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     const loadingData = JSON.parse(localStorage.getItem("cacheData"));
-    if (loadingData && loadingData.length>0) {
+    if (loadingData && loadingData.length > 0) {
       setContent(loadingData);
     }
-  },[])
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     localStorage.setItem("cacheData", JSON.stringify(content));
-  },[content])
+  }, [content]);
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -80,8 +80,8 @@ export default function Foreground() {
         currentDisplay={currentDisplay}
         setCurrentDisplay={setCurrentDisplay}
         previewCardIndex={previewCardIndex}
-        content = {content}
-        editCard = {editCard}
+        content={content}
+        editCard={editCard}
       />
     </>
   );
