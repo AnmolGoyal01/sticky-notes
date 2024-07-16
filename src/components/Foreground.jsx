@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 import AddButton from "./AddButton";
 import AddNewCard from "./AddNewCard";
@@ -11,6 +11,17 @@ export default function Foreground() {
   const [currentDisplay, setCurrentDisplay] = useState("HOME");
   const [previewCardIndex, setPreviewCardIndex] = useState(0)
   const ref = useRef(null);
+
+  useEffect(()=>{
+    const loadingData = JSON.parse(localStorage.getItem("cacheData"));
+    if (loadingData && loadingData.length>0) {
+      setContent(loadingData);
+    }
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem("cacheData", JSON.stringify(content));
+  },[content])
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
