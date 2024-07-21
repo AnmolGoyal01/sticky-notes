@@ -57,6 +57,10 @@ _To run this project locally with npm, follow these steps:_
 - **CSS:** Styling the application.
 - **JavaScript:** Adding interactivity.
 
+## Author
+
+- **Anmol Goyal:** [GitHub](https://github.com/Anmolgoyal01)
+
 ## Contact
 
 - **GitHub:** [Anmolgoyal01](https://github.com/anmolgoyal01)
